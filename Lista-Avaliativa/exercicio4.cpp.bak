@@ -1,0 +1,65 @@
+#include <iostream>	
+
+using namespace std;
+
+struct alunos
+{
+   int matricula;
+   string nome;
+};
+
+int buscabinaria (int n, int valor, int & aux, alunos *aluno)
+{
+	int  begin=0, vf =0;
+   while ((begin <= n) and (vf == 0))
+   {
+      aux = (begin + n) / 2;
+      cout << aluno[aux].matricula << endl;
+
+      if(aluno[aux].matricula == valor)
+      {
+         vf = 1;
+      }
+
+      if(aluno[aux].matricula < valor)
+      {
+         begin = aux ++;
+      }
+      if(aluno[aux].matricula > valor)
+      {
+         n = aux;
+      }
+   }
+   
+   return vf;
+}
+
+
+
+int main(){
+   int n;
+   cin >> n; 
+
+   alunos aluno[n];
+
+   for (int i = 0; i < n; i++)
+   {
+      cin >> aluno[i].matricula;
+
+      cin.ignore();
+      getline(cin, aluno[i].nome);
+      
+   }
+
+   int valor, vf = 0, aux;
+   cin >> valor;
+   n--;
+   vf = buscabinaria (n,valor,aux,aluno);
+   
+   
+   
+   if(vf == 1)
+   {
+     cout << aluno[aux].nome;
+   }
+}
